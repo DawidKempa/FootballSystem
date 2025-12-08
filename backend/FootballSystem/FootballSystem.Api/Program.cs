@@ -1,4 +1,9 @@
 
+using FootballSystem.Domain.Interfaces;
+using FootballSystem.Infrastructure.Data;
+using FootballSystem.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 namespace FootballSystem.Api
 {
     public class Program
@@ -6,6 +11,10 @@ namespace FootballSystem.Api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<FootballContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
 
             // Add services to the container.
 
@@ -15,6 +24,12 @@ namespace FootballSystem.Api
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            using(var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<FootballContext>();
+                FootballContext.SeedData(db);
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

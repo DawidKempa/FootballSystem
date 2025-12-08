@@ -5,6 +5,10 @@ VisualStudioVersion = 17.14.36414.22 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballSystem.Api", "FootballSystem.Api\FootballSystem.Api.csproj", "{3313F6CD-332A-4859-9E85-B0D38F90CA5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballSystem.Domain", "FootballSystem.Domain\FootballSystem.Domain.csproj", "{E90FDE74-B668-4FCA-89F2-23E46D108C8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballSystem.Infrastructure", "FootballSystem.Infrastructure\FootballSystem.Infrastructure.csproj", "{7F637E83-0A27-4F14-9698-5C48C09DE953}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{3313F6CD-332A-4859-9E85-B0D38F90CA5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3313F6CD-332A-4859-9E85-B0D38F90CA5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3313F6CD-332A-4859-9E85-B0D38F90CA5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E90FDE74-B668-4FCA-89F2-23E46D108C8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E90FDE74-B668-4FCA-89F2-23E46D108C8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E90FDE74-B668-4FCA-89F2-23E46D108C8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E90FDE74-B668-4FCA-89F2-23E46D108C8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F637E83-0A27-4F14-9698-5C48C09DE953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F637E83-0A27-4F14-9698-5C48C09DE953}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F637E83-0A27-4F14-9698-5C48C09DE953}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F637E83-0A27-4F14-9698-5C48C09DE953}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
