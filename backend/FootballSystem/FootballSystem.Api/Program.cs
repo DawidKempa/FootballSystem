@@ -1,4 +1,5 @@
 
+using FootballSystem.Api.Middleware;
 using FootballSystem.Application.Interfaces;
 using FootballSystem.Application.Services;
 using FootballSystem.Domain.Interfaces;
@@ -18,6 +19,7 @@ namespace FootballSystem.Api
 
             builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
             builder.Services.AddScoped<IPlayerService, PlayerService>();
+            builder.Services.AddTransient<GlobalExceptionMiddleware>();
 
             // Add services to the container.
 
@@ -27,6 +29,8 @@ namespace FootballSystem.Api
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            app.UseMiddleware<GlobalExceptionMiddleware>();
 
             using(var scope = app.Services.CreateScope())
             {

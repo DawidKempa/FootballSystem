@@ -45,6 +45,10 @@ namespace FootballSystem.Api.Controllers
         {
             if (id != player.Id) return BadRequest(); 
             var updatedPlayer = await _playerService.UpdateAsync(player, id);
+
+            if ((updatedPlayer == null))
+                return NotFound();
+            
             return Ok(updatedPlayer);
         }
 

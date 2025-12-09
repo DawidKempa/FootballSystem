@@ -60,6 +60,9 @@ namespace FootballSystem.Application.Services
 
         public async Task<PlayerDto> CreateAsync(CreatePlayerDto playerDto)
         {
+            if (await _playerRepository.NumberExistsAsync(playerDto.Number))
+                throw new Exception("Numer zawodnika juz istnieje");
+
             var player = new Player
             {
                 Name = playerDto.Name,
@@ -94,7 +97,10 @@ namespace FootballSystem.Application.Services
         {
             var existingPlayer = await _playerRepository.GetByIdAsync(id);
 
-            if (existingPlayer == null) return null; 
+            if (existingPlayer == null) return null;
+
+            if (await _playerRepository.NumberExistsAsync(playerDto.Number, id))
+                throw new ArgumentException("Numer zawodnika jest już zajęty");
 
             existingPlayer.Name = playerDto.Name;
             existingPlayer.LastName = playerDto.LastName;

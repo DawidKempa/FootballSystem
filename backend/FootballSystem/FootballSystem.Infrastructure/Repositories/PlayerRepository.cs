@@ -48,5 +48,10 @@ namespace FootballSystem.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<bool> NumberExistsAsync(int number, int? playerId = null)
+        {
+            return await _context.Players.AnyAsync(p => p.Number == number && (playerId == null || p.Id != playerId));
+        }
     }
 }

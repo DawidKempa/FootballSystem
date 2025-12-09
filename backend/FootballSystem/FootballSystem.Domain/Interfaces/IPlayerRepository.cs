@@ -14,5 +14,6 @@ namespace FootballSystem.Domain.Interfaces
         Task<Player> AddAsync(Player player);
         Task<Player> UpdateAsync(Player player);
         Task<bool> DeleteAsync(int id);
+        Task<bool> NumberExistsAsync(int number, int? playerId = null);
     }
 }
