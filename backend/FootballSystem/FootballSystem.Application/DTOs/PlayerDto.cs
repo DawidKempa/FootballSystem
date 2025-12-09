@@ -15,7 +15,7 @@ namespace FootballSystem.Application.DTOs
         public int Number {  get; set; }
         public int Age { get; set; }
         public string Nationality { get; set; }
-        public Position Position { get; set; }
+        public string Position { get; set; }   //potrzebna konwersja z enum na string
         public int Games { get; set; }
         public int Goals { get; set; }
         public int Assists { get; set; }

@@ -1,4 +1,6 @@
 
+using FootballSystem.Application.Interfaces;
+using FootballSystem.Application.Services;
 using FootballSystem.Domain.Interfaces;
 using FootballSystem.Infrastructure.Data;
 using FootballSystem.Infrastructure.Repositories;
@@ -15,6 +17,7 @@ namespace FootballSystem.Api
             builder.Services.AddDbContext<FootballContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
+            builder.Services.AddScoped<IPlayerService, PlayerService>();
 
             // Add services to the container.
 
