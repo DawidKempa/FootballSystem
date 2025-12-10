@@ -1,4 +1,5 @@
-﻿using FootballSystem.Application.DTOs;
+﻿using AutoMapper;
+using FootballSystem.Application.DTOs;
 using FootballSystem.Application.Interfaces;
 using FootballSystem.Domain.Entities;
 using FootballSystem.Domain.Interfaces;
@@ -13,17 +14,19 @@ namespace FootballSystem.Application.Services
     public class PlayerService : IPlayerService
     {
         private readonly IPlayerRepository _playerRepository;
+        private readonly IMapper _mapper;
 
-        public PlayerService(IPlayerRepository playerRepository)
+        public PlayerService(IPlayerRepository playerRepository, IMapper mapper)
         {
             _playerRepository = playerRepository;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<PlayerDto>> GetAllAsync()
         {
-            var player = await _playerRepository.GetAllAsync();
+            var players = await _playerRepository.GetAllAsync();
 
-            return player.Select(x => new PlayerDto
+           /* return player.Select(x => new PlayerDto
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -36,12 +39,15 @@ namespace FootballSystem.Application.Services
                 Goals = x.Goals,
                 Assists = x.Assists,
             });
+           */
+
+            return _mapper.Map<IEnumerable<PlayerDto>>(players);
         }
         public async Task<PlayerDto?> GetByIdAsync(int id)
         {
             var player = await _playerRepository.GetByIdAsync(id);
             if (player == null) return null;
-
+            /*
             return new PlayerDto
             {
                 Id = player.Id,
@@ -55,14 +61,15 @@ namespace FootballSystem.Application.Services
                 Goals = player.Goals,
                 Assists = player.Assists,
             };
-            
+            */
+            return _mapper.Map<PlayerDto>(player);
         }
 
         public async Task<PlayerDto> CreateAsync(CreatePlayerDto playerDto)
         {
             if (await _playerRepository.NumberExistsAsync(playerDto.Number))
                 throw new Exception("Numer zawodnika juz istnieje");
-
+            /*
             var player = new Player
             {
                 Name = playerDto.Name,
@@ -75,9 +82,11 @@ namespace FootballSystem.Application.Services
                 Goals = playerDto.Goals,
                 Assists = playerDto.Assists,
             };
-
+            */
+            var player = _mapper.Map<Player>(playerDto);
             var created = await _playerRepository.AddAsync(player);
 
+            /*
             return new PlayerDto
             {
                 Id = created.Id,
@@ -91,9 +100,11 @@ namespace FootballSystem.Application.Services
                 Goals = created.Goals,
                 Assists = created.Assists,
             };
+            */
+            return _mapper.Map<PlayerDto>(created);
         }
 
-        public async Task<PlayerDto> UpdateAsync(UpdatePlayerDto playerDto, int id)
+        public async Task<PlayerDto?> UpdateAsync(UpdatePlayerDto playerDto, int id)
         {
             var existingPlayer = await _playerRepository.GetByIdAsync(id);
 
@@ -101,7 +112,7 @@ namespace FootballSystem.Application.Services
 
             if (await _playerRepository.NumberExistsAsync(playerDto.Number, id))
                 throw new ArgumentException("Numer zawodnika jest już zajęty");
-
+            /*
             existingPlayer.Name = playerDto.Name;
             existingPlayer.LastName = playerDto.LastName;
             existingPlayer.Number = playerDto.Number;
@@ -111,9 +122,13 @@ namespace FootballSystem.Application.Services
             existingPlayer.Games = playerDto.Games;
             existingPlayer.Goals = playerDto.Goals;
             existingPlayer.Assists = playerDto.Assists;
+            */
+
+            _mapper.Map(playerDto, existingPlayer);
 
             await _playerRepository.UpdateAsync(existingPlayer);
 
+            /*
             return new PlayerDto
             {
                 Id = existingPlayer.Id,
@@ -127,6 +142,8 @@ namespace FootballSystem.Application.Services
                 Goals = existingPlayer.Goals,
                 Assists = existingPlayer.Assists,
             };
+            */
+            return _mapper.Map<PlayerDto>(existingPlayer);
         }
 
         public async Task<bool> DeleteAsync(int id)

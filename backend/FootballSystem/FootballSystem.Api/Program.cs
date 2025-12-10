@@ -1,6 +1,7 @@
 
 using FootballSystem.Api.Middleware;
 using FootballSystem.Application.Interfaces;
+using FootballSystem.Application.Mapping;
 using FootballSystem.Application.Services;
 using FootballSystem.Domain.Interfaces;
 using FootballSystem.Infrastructure.Data;
@@ -20,6 +21,7 @@ namespace FootballSystem.Api
             builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
             builder.Services.AddScoped<IPlayerService, PlayerService>();
             builder.Services.AddTransient<GlobalExceptionMiddleware>();
+            builder.Services.AddAutoMapper(typeof(PlayerProfile));
 
             // Add services to the container.
 
