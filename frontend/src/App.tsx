@@ -1,8 +1,18 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import PlayersListPage from "./pages/PlayersListPage";
+import EditPlayerPage from "./pages/EditPlayerPage";
+import AddPlayerPage from "./pages/AddPlayerPage";
+import PlayersDetailPage from "./pages/PlayersDetailPage";
 function App() {
   return (
-    <main className="py-10 h-screen">
-      <h1 className="font-bold">Hello Football System Frontend!</h1>
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<PlayersListPage />} />
+        <Route path="/player/:id" element={<PlayersDetailPage />} />
+        <Route path="/player/add" element={<AddPlayerPage />} />
+        <Route path="/player/edit/:id" element={<EditPlayerPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
